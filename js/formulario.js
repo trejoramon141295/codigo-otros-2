@@ -22,7 +22,11 @@ formulario.onsubmit = function (event) {
 /** Se corrige que estaba mal escrito event.preventDefault();*/
   event.preventDefault();
 /**
- * Aqui me quede en documentar la funcion
+ * Luego se asigna en valor de cada campo requerido en el formulario a variables tales como:
+ *  Nombre
+ *  Edad
+ *  Nacionalidad
+ * 
  */
   let n = formulario.elements[0];
   let e = formulario.elements[1];
@@ -35,7 +39,12 @@ formulario.onsubmit = function (event) {
   let nacionalidad = na.options[i].value;
   console.log(nombre, edad);
   console.log(nacionalidad);
-
+/**
+ * Posteriormente se valida las siguientes condiciones:
+ * Nombre contenga al menos un caracter
+ * Edad este en el rango de 18 a 120
+ * De no cumplirse se muestra el campo en rojo
+ */
   if (nombre.length === 0) {
     n.classList.add("error");
     console.log("Nombre no valido");
@@ -44,22 +53,27 @@ formulario.onsubmit = function (event) {
     e.classList.add("error");
     console.log("Edad fuera de rango");
   }
-
+/**
+ * Con los datos validos se manda a llamar a la función agregarInvitado
+ */
   if (nombre.length > 0 && (edad > 18 && edad < 120)) {
     console.log(nombre, edad, nacionalidad);
     agregarInvitado(nombre, edad, nacionalidad);
   }
 }//formulario
-
-// let botonBorrar = document.createElement("button")
-// botonBorrar.textContent = "Eliminar invitado"
-// botonBorrar.id = "boton-borrar";
-// document.body.appendChild(botonBorrar);
+/**
+ * Se comentó el siguiente código: 
+ * let botonBorrar = document.createElement("button")
+ * botonBorrar.textContent = "Eliminar invitado"
+ * botonBorrar.id = "boton-borrar";
+ * document.body.appendChild(botonBorrar);* 
+ * 
+ */
 let corteLinea = document.createElement("br");
 document.body.appendChild(corteLinea);
 
 /** 
- * Funcion para agregar un invitado
+ * Función para agregar un invitado
  * @param {String} nombre 
  * @param {Number} edad 
  * @param {String} nacionalidad 
@@ -83,7 +97,7 @@ function agregarInvitado(nombre, edad, nacionalidad) {
   let lista = document.getElementById("lista-de-invitados");
 /** */
   let elementoLista = document.createElement("div");
-/** Se corrige una siintaxis equivocada */
+/** Se corrige una sintaxis equivocada */
   elementoLista.classList.add("elemento-lista");
   lista.appendChild(elementoLista);
 /** 
@@ -100,10 +114,10 @@ function agregarInvitado(nombre, edad, nacionalidad) {
   * Ya que duplicaba informacion que otra función ya hace
   */
 /**
- * Función para crear los Elementos de l ficha de incitado
+ * Función para crear los Elementos de la ficha de invitado
  * @param {String} descripcion 
  * @param {String} valor 
- * @returns {appendChild}
+ * @returns {appendChild} Ficha de Invitado.
  */
   function crearElemento(descripcion, valor) {
     let spanNombre = document.createElement("span")
@@ -113,18 +127,22 @@ function agregarInvitado(nombre, edad, nacionalidad) {
     inputNombre.value = valor
     elementoLista.appendChild(spanNombre)
     elementoLista.appendChild(inputNombre)
-    elementoLista.appendChild(espacio)
+    //elementoLista.appendChild(espacio)
   }//crearElemento
 /**
- * Se llama a la funcion crearElemento de los tres parametro de la ficha de invitad
+ * Se llama a la funcion crearElemento de los tres campos de la ficha de invitado
+ * 
  */
   crearElemento("Nombre", nombre);
   crearElemento("Edad", edad);
   crearElemento("Nacionalidad", nacionalidad);
+/**
+ * Finalmente con el boton Borrar, 
+ * Cuentas con la opción de Eliminar al Invitado si asi lo deseas
+ */
 
-
-  let botonBorrar = document.createElement("button")
-  botonBorrar.textContent = "Eliminar invitado"
+  let botonBorrar = document.createElement("button");
+  botonBorrar.textContent = "Eliminar invitado";
   botonBorrar.id = "boton-borrar";
   let corteLinea = document.createElement("br");
   elementoLista.appendChild(corteLinea);
